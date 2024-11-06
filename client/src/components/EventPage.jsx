@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Calendar } from "lucide-react";
-import universityEventsData from "@/utils/universityEventsData";
+// import universityEventsData from "@/utils/universityEventsData";
 import { logo1 } from "@/assets";
 import BottomNavbar from "./BottomNavbar";
 import {
@@ -21,12 +21,14 @@ const EventPage = () => {
   ];
 
   const sheetData = useFetchSheetData();
+  console.log(sheetData);
+
   const currentTime = useCurrentTime();
   const bgColor = useBackgroundColor(colors);
-  const { todayEvents, currentEvent } = useTodayEvents(
-    universityEventsData.events
-  );
-  // const { todayEvents, currentEvent } = useTodayEvents(sheetData);
+  // const { todayEvents, currentEvent } = useTodayEvents(
+  //   universityEventsData.events
+  // );
+  const { todayEvents, currentEvent } = useTodayEvents(sheetData);
   const progress = useEventProgress(currentEvent);
 
   const formatTime = (dateString) => {
@@ -44,7 +46,10 @@ const EventPage = () => {
       hour12: false,
     });
   };
-  console.log(todayEvents);
+
+  if (sheetData.length === 0) {
+    return <div>Loading events...</div>;
+  }
 
   return (
     <div className="bg-gray-100 h-screen w-screen p-3 flex flex-col md:flex-row">

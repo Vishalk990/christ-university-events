@@ -6,7 +6,7 @@ require("dotenv").config();
 
 const app = express();
 app.use(cors({
-  origin: ["http://localhost:5173", "http://localhost:5174"]
+  origin: ["http://localhost:5173", "http://localhost:5174", process.env.FRONTEND_URL]
 }))
 
 
@@ -28,6 +28,11 @@ const auth = new google.auth.GoogleAuth({
 });
 const sheets = google.sheets({ version: 'v4', auth });
 
+app.get("/", (req, res) => {
+  res.status(200).json({
+    message: "Test"
+  })
+})
 
 app.get('/api/sheet-data', async (req, res) => {
   try {
@@ -52,7 +57,7 @@ app.get('/api/sheet-data', async (req, res) => {
       return rowObject;
     });
     console.log(formattedData);
-    
+
     res.json(formattedData);
   } catch (error) {
     console.error('Error fetching sheet data:', error);

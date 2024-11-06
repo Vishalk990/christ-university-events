@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+const BACKEND_URL = import.meta.env.BACKEND_URL || "http://localhost:3000";
+
 // Hook to fetch data from Google Sheets API
 export const useFetchSheetData = () => {
   const [sheetData, setSheetData] = useState([]);
@@ -7,7 +9,7 @@ export const useFetchSheetData = () => {
   useEffect(() => {
     async function fetchSheetData() {
       try {
-        const response = await fetch('http://localhost:3000/api/sheet-data');
+        const response = await fetch(`${BACKEND_URL}/api/sheet-data`);
         const data = await response.json();
         setSheetData(data);
       } catch (error) {
