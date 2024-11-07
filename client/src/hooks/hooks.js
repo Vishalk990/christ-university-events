@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
+console.log(`${BACKEND_URL}/api/sheet-data`);
 
 // Hook to fetch data from Google Sheets API
 export const useFetchSheetData = () => {
