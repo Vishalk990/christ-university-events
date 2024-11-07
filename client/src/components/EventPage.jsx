@@ -21,7 +21,6 @@ const EventPage = () => {
   ];
 
   const sheetData = useFetchSheetData();
-  console.log(sheetData);
 
   const currentTime = useCurrentTime();
   const bgColor = useBackgroundColor(colors);
@@ -46,6 +45,8 @@ const EventPage = () => {
       hour12: false,
     });
   };
+  console.log(todayEvents);
+  
 
   if (sheetData.length === 0) {
     return <div>Loading events...</div>;
